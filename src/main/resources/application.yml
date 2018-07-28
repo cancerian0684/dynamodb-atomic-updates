@@ -1,6 +1,6 @@
 aws:
-  accessKey : <aws-access-key>
-  secretKey : <aws-secret>
+  accessKey : <your-aws-access-key>
+  secretKey : <your-aws-secret>
   region : us-east-1
   dynamodb :
     endpoint:
