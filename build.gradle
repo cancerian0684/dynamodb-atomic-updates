@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '2.0.3.RELEASE'
+		springBootVersion = '2.1.4.RELEASE'
 	}
 	repositories {
 		mavenCentral()
@@ -26,7 +26,6 @@ repositories {
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
-    compile('org.projectlombok:lombok:1.16.20')
 
 	compile group: 'com.amazonaws', name: 'aws-java-sdk-dynamodb', version: '1.11.9'
 	testCompile('org.springframework.boot:spring-boot-starter-test')

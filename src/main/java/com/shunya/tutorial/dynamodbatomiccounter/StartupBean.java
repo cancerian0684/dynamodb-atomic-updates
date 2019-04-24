@@ -1,5 +1,9 @@
 package com.shunya.tutorial.dynamodbatomiccounter;
 
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
+import com.amazonaws.services.dynamodbv2.document.DynamoDB;
+import com.shunya.tutorial.dynamodbatomiccounter.atomic.Content;
+import com.shunya.tutorial.dynamodbatomiccounter.atomic.ContentDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -12,8 +16,19 @@ public class StartupBean implements CommandLineRunner {
     @Autowired
     private ContentDao contentDao;
 
+    @Autowired
+    private AmazonDynamoDBClient amazonDynamoDBClient;
+
+    @Autowired
+    private DynamoDB dynamoDB;
+
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
+        createTable();
+        addRecord();
+    }
+
+    private void addRecord() {
         try {
             Content dto = new Content();
             dto.setId(UUID.randomUUID().toString());
@@ -26,4 +41,13 @@ public class StartupBean implements CommandLineRunner {
             e.printStackTrace();
         }
     }
+
+    public void createTable() {
+        try {
+            new TableCreator(amazonDynamoDBClient, dynamoDB).createTable();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
