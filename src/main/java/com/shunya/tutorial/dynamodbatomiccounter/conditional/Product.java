@@ -3,6 +3,7 @@ package com.shunya.tutorial.dynamodbatomiccounter.conditional;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBVersionAttribute;
 
 @DynamoDBTable(tableName = "local-product")
 public class Product {
@@ -14,6 +15,9 @@ public class Product {
 
     @DynamoDBAttribute
     private long price;
+
+    @DynamoDBVersionAttribute
+    private long version;
 
     public String getId() {
         return id;
@@ -37,5 +41,13 @@ public class Product {
 
     public void setPrice(long price) {
         this.price = price;
+    }
+
+    public long getVersion() {
+        return version;
+    }
+
+    public void setVersion(long version) {
+        this.version = version;
     }
 }
